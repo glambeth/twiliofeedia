@@ -14,4 +14,21 @@ api.post('/alert', function(req, res) {
 	console.log('hit the body');
 });
 
+api.post('/addPhoneNumber', function(req, res) {
+	console.log(req);
+	console.log('got the phone number');
+	var user = new User({
+		accountID: req.body.accountId,
+		userID: req.body.userId,
+		phoneNumber: req.body.phoneNumber
+	});
+	user.save(function(err) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log('user saved');
+		}
+	})
+});
+
 module.exports = api;
