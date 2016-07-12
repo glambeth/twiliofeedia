@@ -1,9 +1,12 @@
 var config = require('./config.js');
+var api = require('./routes/api.js')
 var express = require('express');
 var request = require('request');
 var mongoose = require('mongoose');
 var twilio = require('twilio')(config.account_SID, config.AUTH_TOKEN);
 var app = express();
+
+app.use('/api', api);
 
 mongoose.connect(config.database, function(err) {
 	if (err) {
