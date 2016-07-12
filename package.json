@@ -1,0 +1,26 @@
+{
+  "name": "twiliofeedia",
+  "version": "1.0.0",
+  "description": "SMS alerts",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/glambeth/twiliofeedia.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/glambeth/twiliofeedia/issues"
+  },
+  "homepage": "https://github.com/glambeth/twiliofeedia",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongoose": "^4.5.4",
+    "request": "^2.73.0",
+    "twilio": "^2.9.1"
+  }
+}
