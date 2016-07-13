@@ -22,7 +22,9 @@ api.post('/alert', function(req, res) {
 		} else {
 			console.log(dom);
 		}
-	})
+	});
+	var parser = new htmlParser.Parser(handler);
+	parser.parseComplete(req.body.alerts);
 	client.sendMessage({
 		to: '+15185862845',
 		from: config.twilioNumber,
