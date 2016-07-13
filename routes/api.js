@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 var config = require('../config.js')
 var cors = require('cors');
 var User = require('../models/user.js')
-var htmlParser = require('htmlparser')
 var client = require('twilio')(config.account_SID, config.AUTH_TOKEN);
 
 var api = express.Router();
@@ -16,27 +15,20 @@ api.use(cors());
 api.post('/alert', function(req, res) {
 	console.log(req);
 	console.log('hit the body');
-	var handler = new htmlParser.DefaultHandler(function (err, dom) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log(dom);
-		}
-	});
-	var parser = new htmlParser.Parser(handler);
-	parser.parseComplete(req.body.alerts);
-	client.sendMessage({
-		to: '+15185862845',
-		from: config.twilioNumber,
-		body: 'test message'
-	}, function(err, responseData) {
- 		if (err) {
-			console.log(err);
-			console.log('there was an error');
-		} else {
-			console.log(responseData);
-			console.log('no error');
-		}
+	User.findOne({userID: req.body.ID}, function(err, user) {
+		client.sendMessage({
+			to: '+' + user.phoneNumber,
+			from: config.twilioNumber,
+			body: req.body.alertName
+		}, function(err, responseData) {
+ 			if (err) {
+				console.log(err);
+				console.log('there was an error');
+			} else {
+				console.log(responseData);
+				console.log('no error');
+			}
+		});
 	});
 });
 
