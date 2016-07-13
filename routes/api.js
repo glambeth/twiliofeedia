@@ -16,19 +16,25 @@ api.post('/alert', function(req, res) {
 	console.log(req);
 	console.log('hit the body');
 	User.findOne({userID: req.body.ID}, function(err, user) {
-		client.sendMessage({
-			to: '+' + user.phoneNumber,
-			from: config.twilioNumber,
-			body: req.body.alertName
-		}, function(err, responseData) {
- 			if (err) {
-				console.log(err);
-				console.log('there was an error');
-			} else {
-				console.log(responseData);
-				console.log('no error');
+		if (err) { 
+			console.log(err);
+		} else {
+			if (user) {
+				client.sendMessage({
+					to: '+' + user.phoneNumber,
+					from: config.twilioNumber,
+					body: req.body.alertName
+				}, function(err, responseData) {
+	 				if (err) {
+						console.log(err);
+						console.log('there was an error');
+					} else {
+						console.log(responseData);
+						console.log('no error');
+					}
+				});
 			}
-		});
+		}
 	});
 });
 
