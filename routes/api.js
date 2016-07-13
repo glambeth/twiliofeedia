@@ -3,12 +3,14 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var config = require('../config.js')
+var cors = require('cors');
 var User = require('../models/user.js')
 var client = require('twilio')(config.account_SID, config.AUTH_TOKEN);
 
 var api = express.Router();
 api.use(bodyParser.urlencoded({ extended: false }));
 api.use(bodyParser.json());
+api.use(cors());
 
 api.post('/alert', function(req, res) {
 	console.log(req);
@@ -18,7 +20,7 @@ api.post('/alert', function(req, res) {
 		from: config.twilioNumber,
 		body: 'test message'
 	}, function(err, responseData) {
-		if (err) {
+ 		if (err) {
 			console.log(err);
 			console.log('there was an error');
 		} else {
@@ -32,7 +34,7 @@ api.post('/addPhoneNumber', function(req, res) {
 	console.log(req);
 	console.log('got the phone number');
 	var user = new User({
-		accountID: req.body.accountId,
+		accountID: req.body.accountId,			
 		userID: req.body.userId,
 		phoneNumber: req.body.phoneNumber
 	});
@@ -42,7 +44,7 @@ api.post('/addPhoneNumber', function(req, res) {
 		} else {
 			console.log('user saved');
 		}
-	})
+	});
 });
 
 module.exports = api;
