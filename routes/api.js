@@ -16,7 +16,7 @@ api.use(cors());
 api.post('/alert', function(req, res) {
 	console.log(req);
 	console.log('hit the body');
-	var handler = new htmlParser.defaultHandler(function (err, dom) {
+	var handler = new htmlParser.DefaultHandler(function (err, dom) {
 		if (err) {
 			console.log(err);
 		} else {
