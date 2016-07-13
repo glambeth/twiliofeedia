@@ -5,7 +5,7 @@ var Schema = Mongoose.Schema;
 var UserSchema = new Schema({
 	accountID: { type: String, required: true, index: { unique: false } },
 	userID: {type: String, required: true},
-	phoneNumber: {type: Number, required: false}
+	phoneNumber: {type: String, required: false}
 });
 
 module.exports = Mongoose.model('User', UserSchema);
