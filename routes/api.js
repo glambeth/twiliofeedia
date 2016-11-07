@@ -15,21 +15,7 @@ api.use(cors());
 api.post('/alert', function(req, res) {
 	console.log(req.body);
 	console.log('hit the body');
-	
-	client.sendMessage({
-		to: '+15185862845',
-		from: config.twilioNumber,
-		body: req.body.alertName
-	}, function(err, responseData) {
-			if (err) {
-			console.log(err);
-			console.log('there was an error');
-		} else {
-			console.log(responseData);
-			console.log('no error');
-		}
-	});
-	/*User.findOne({userID: req.body.ID}, function(err, user) {
+	User.findOne({userID: req.body.ID}, function(err, user) {
 		if (err) { 
 			console.log(err);
 		} else {
@@ -49,8 +35,7 @@ api.post('/alert', function(req, res) {
 				});
 			}
 		}
-	}); */
-
+	}); 
 });
 
 api.post('/addPhoneNumber', function(req, res) {
